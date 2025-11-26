@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mes réservations – Hôtel Louvain</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="content-box">
+      <h1>Mes réservations</h1>
+
+      <% if (reservations.length === 0) { %>
+      <p>Vous n'avez encore aucune réservation.</p>
+      <% } else { %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Chambre</th>
+            <th>Type</th>
+            <th>Arrivée</th>
+            <th>Départ</th>
+            <th>Personnes</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reservations.forEach(r => { %>
+          <tr>
+            <td><%= r.roomId ? r.roomId.name : '-' %></td>
+            <td><%= r.roomId ? r.roomId.type : '-' %></td>
+            <td><%= r.checkIn.toISOString().slice(0,10) %></td>
+            <td><%= r.checkOut.toISOString().slice(0,10) %></td>
+            <td><%= r.guests %></td>
+            <td><%= r.status %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+
+      <p style="margin-top: 1.5rem">
+        <a href="/">← Retour à l'accueil</a>
+      </p>
+    </div>
+  </body>
+</html>

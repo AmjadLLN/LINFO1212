@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin – Hôtel Louvain</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="content-box">
+      <h1>Administration Hôtel Louvain</h1>
+      <p>Bienvenue, <%= user.username %></p>
+
+      <div class="links">
+        <a href="/admin/rooms">Chambres</a> |
+        <a href="/admin/reservations">Réservations</a> |
+        <a href="/">Retour au site</a>
+      </div>
+    </div>
+  </body>
+</html>

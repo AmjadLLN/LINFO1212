@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Connexion – Hôtel Louvain</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h1>Connexion</h1>
+
+    <% if (error) { %>
+    <p style="color: red"><%= error %></p>
+    <% } %>
+
+    <form action="/login" method="POST" class="form-box">
+      <input type="email" name="email" placeholder="Email" required />
+      <input
+        type="password"
+        name="password"
+        placeholder="Mot de passe"
+        required
+      />
+      <button type="submit">Se connecter</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 1rem">
+      Pas encore de compte ? <a href="/register">Créer un compte</a>
+    </p>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= room.name %> – Hôtel Louvain</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="content-box">
+      <h1><%= room.name %> – <%= room.type %></h1>
+
+      <p><strong><%= room.pricePerNight %> € / nuit</strong></p>
+      <p>Capacité : <%= room.capacity %> personnes</p>
+      <p><%= room.description %></p>
+
+      <% if (room.amenities && room.amenities.length) { %>
+      <h3>Équipements</h3>
+      <ul>
+        <% room.amenities.forEach(a => { %>
+        <li><%= a %></li>
+        <% }) %>
+      </ul>
+      <% } %> <% if (error) { %>
+      <p style="color: red"><%= error %></p>
+      <% } %> <% if (!user) { %>
+      <p>Vous devez être connecté pour réserver.</p>
+      <a href="/login">Se connecter</a>
+      <% } else { %>
+      <h2>Réserver cette chambre</h2>
+      <form
+        action="/rooms/<%= room._id %>/reserve"
+        method="POST"
+        class="form-box"
+      >
+        <label
+          >Date d'arrivée:
+          <input type="date" name="checkIn" required />
+        </label>
+
+        <label
+          >Date de départ:
+          <input type="date" name="checkOut" required />
+        </label>
+
+        <label
+          >Nombre de personnes:
+          <input type="number" name="guests" min="1" value="1" required />
+        </label>
+
+        <button type="submit">Confirmer la réservation</button>
+      </form>
+      <% } %>
+
+      <p style="margin-top: 1.5rem">
+        <a href="/rooms">← Retour à la recherche</a>
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin – Chambres</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="content-box">
+      <h1>Gestion des chambres</h1>
+
+      <h2>Ajouter une chambre</h2>
+      <form action="/admin/rooms" method="POST" class="form-box">
+        <input
+          type="text"
+          name="name"
+          placeholder="Nom de la chambre"
+          required
+        />
+        <select name="type">
+          <option value="single">Single</option>
+          <option value="double">Double</option>
+          <option value="suite">Suite</option>
+        </select>
+        <input
+          type="number"
+          name="pricePerNight"
+          placeholder="Prix / nuit (€)"
+          required
+        />
+        <input type="number" name="capacity" placeholder="Capacité" required />
+        <input
+          type="text"
+          name="amenities"
+          placeholder="Équipements (séparés par des virgules)"
+        />
+        <input
+          type="text"
+          name="imageUrl"
+          placeholder="URL image (optionnel)"
+        />
+        <textarea name="description" placeholder="Description"></textarea>
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <h2>Liste des chambres</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Prix</th>
+            <th>Capacité</th>
+            <th>Active ?</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% rooms.forEach(room => { %>
+          <tr>
+            <td><%= room.name %></td>
+            <td><%= room.type %></td>
+            <td><%= room.pricePerNight %> €</td>
+            <td><%= room.capacity %></td>
+            <td><%= room.isActive ? 'Oui' : 'Non' %></td>
+            <td>
+              <form
+                action="/admin/rooms/<%= room._id %>/toggle"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit">
+                  <%= room.isActive ? 'Désactiver' : 'Activer' %>
+                </button>
+              </form>
+              <form
+                action="/admin/rooms/<%= room._id %>/delete"
+                method="POST"
+                style="display: inline"
+              >
+                <button
+                  type="submit"
+                  onclick="return confirm('Supprimer cette chambre ?');"
+                >
+                  Supprimer
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 1.5rem">
+        <a href="/admin">← Retour admin</a>
+      </p>
+    </div>
+  </body>
+</html>

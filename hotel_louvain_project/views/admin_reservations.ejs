@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin – Réservations</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="content-box">
+      <h1>Gestion des réservations</h1>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Email</th>
+            <th>Chambre</th>
+            <th>Arrivée</th>
+            <th>Départ</th>
+            <th>Personnes</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% reservations.forEach(r => { %>
+          <tr>
+            <td><%= r.userId ? r.userId.username : '-' %></td>
+            <td><%= r.userId ? r.userId.email : '-' %></td>
+            <td><%= r.roomId ? r.roomId.name : '-' %></td>
+            <td><%= r.checkIn.toISOString().slice(0,10) %></td>
+            <td><%= r.checkOut.toISOString().slice(0,10) %></td>
+            <td><%= r.guests %></td>
+            <td><%= r.status %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 1.5rem">
+        <a href="/admin">← Retour admin</a>
+      </p>
+    </div>
+  </body>
+</html>

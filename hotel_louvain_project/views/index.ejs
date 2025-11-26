@@ -1,0 +1,42 @@
+<h1>Home</h1>
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hôtel Louvain – Accueil</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="content-box">
+      <h1>Bienvenue à l'Hôtel Louvain</h1>
+
+      <% if (user) { %>
+      <p>Connecté en tant que <strong><%= user.username %></strong></p>
+      <div class="links">
+        <a href="/rooms">🔍 Rechercher une chambre</a> |
+        <a href="/my-reservations">📅 Mes réservations</a> |
+        <a href="/logout">Se déconnecter</a>
+        <% if (user.isAdmin) { %> | <a href="/admin">🛠 Admin</a> <% } %>
+      </div>
+      <% } else { %>
+      <p>Connectez-vous pour réserver votre séjour.</p>
+      <div class="links">
+        <a href="/login">Se connecter</a> |
+        <a href="/register">Créer un compte</a>
+      </div>
+      <% } %>
+
+      <h2>Chambres en avant</h2>
+      <div class="card-grid">
+        <% rooms.forEach(room => { %>
+        <div class="card">
+          <h3><%= room.name %> – <%= room.type %></h3>
+          <p><strong><%= room.pricePerNight %> € / nuit</strong></p>
+          <p>Capacité : <%= room.capacity %> personnes</p>
+          <a href="/rooms/<%= room._id %>">Voir les détails</a>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

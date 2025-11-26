@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recherche de chambres – Hôtel Louvain</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="content-box">
+      <h1>Rechercher une chambre</h1>
+
+      <form method="GET" action="/rooms" class="filter-form">
+        <label>
+          Type :
+          <select name="type">
+            <option value="all" <%= filters.type === 'all' ? 'selected' : '' %>>Tous</option>
+            <option value="single" <%= filters.type === 'single' ? 'selected' : '' %>>Single</option>
+            <option value="double" <%= filters.type === 'double' ? 'selected' : '' %>>Double</option>
+            <option value="suite" <%= filters.type === 'suite' ? 'selected' : '' %>>Suite</option>
+          </select>
+        </label>
+
+        <label>Prix min:
+          <input type="number" name="minPrice" value="<%= filters.minPrice %>" />
+        </label>
+
+        <label>Prix max:
+          <input type="number" name="maxPrice" value="<%= filters.maxPrice %>" />
+        </label>
+
+        <button type="submit">Filtrer</button>
+      </form>
+
+      <div class="card-grid">
+        <% if (rooms.length === 0) { %>
+          <p>Aucune chambre ne correspond à votre recherche.</p>
+        <% } %>
+
+        <% rooms.forEach(room => { %>
+          <div class="card">
+            <h3><%= room.name %> – <%= room.type %></h3>
+            <p><strong><%= room.pricePerNight %> € / nuit</strong></p>
+            <p>Capacité : <%= room.capacity %> personnes</p>
+            <a href="/rooms/<%= room._id %>">Voir les détails</a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
